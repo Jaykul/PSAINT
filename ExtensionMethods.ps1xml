@@ -1,0 +1,89 @@
+<Types>
+   <Type>
+      <Name>System.Object</Name>
+      <Members>
+         <ScriptMethod>
+            <Name>MustEqual</Name>
+            <Script>
+               param([Parameter(Mandatory=$true,Position=1)]$Expected, [string]$Message="'$this' is not Equal to '$Expected'")
+               Assert-That { $this -ceq $Expected } -FailMessage $Message
+            </Script>
+         </ScriptMethod>
+         <ScriptMethod>
+            <Name>MustContain</Name>
+            <Script>
+               param([Parameter(Mandatory=$true,Position=1)]$Expected, [string]$Message="'$($this -join "','")' does not contain '$Expected'")
+               Assert-That { $this -Contains $Expected } -FailMessage $Message
+            </Script>
+         </ScriptMethod>         
+         <ScriptMethod>
+            <Name>MustNotEqual</Name>
+            <Script>
+               param([Parameter(Mandatory=$true,Position=1)]$Expected, [string]$Message="'$this' is Equal to '$Expected'")
+               Assert-That { $this -cne $Expected } -FailMessage $Message
+            </Script>
+         </ScriptMethod>
+         <ScriptMethod>
+            <Name>MustBeTrue</Name>
+            <Script>
+               param([string]$Message="Is not True")
+               Assert-That { $this } -FailMessage $Message
+            </Script>
+         </ScriptMethod>
+         <ScriptMethod>
+            <Name>MustBeFalse</Name>
+            <Script>
+               param([string]$Message="Is not False")
+               Assert-That { -not $this } -FailMessage $Message
+            </Script>
+         </ScriptMethod>
+         <ScriptMethod>
+            <Name>MustBeA</Name>
+            <Script>
+               param([Parameter(Mandatory=$true,Position=1)][Type]$Expected,[string]$Message="Object is not a '$($Expected.FullName)', it is a '$($this.GetType().FullName)'")
+               Assert-That { $this -is $Expected } -FailMessage $Message
+            </Script>
+         </ScriptMethod>
+      </Members>
+   </Type>
+   <Type>
+      <Name>System.Management.Automation.ScriptBlock</Name>
+      <Members>
+         <ScriptMethod>
+            <Name>MustThrow</Name>
+            <Script>
+               param([Parameter(Mandatory=$true,Position=1)]$Exception, [string]$Message="Did not throw $Exception")
+               Assert-That $this -Throws $Exception -FailMessage $Message
+            </Script>
+         </ScriptMethod>
+      </Members>
+   </Type>
+   <Type>
+      <Name>System.__ComObject</Name>
+      <Members>
+         <ScriptMethod>
+            <Name>GetProperty</Name>
+            <Script>
+               param([Parameter(Mandatory=$true,Position=1)]$PropertyName)
+               Write-Verbose "PropertyName: $PropertyName"
+               Write-Verbose "Arguments: $($Args | Out-String)"
+               $this.gettype().invokeMember($PropertyName,[System.Reflection.BindingFlags]::GetProperty,$null,$this,@($Args))
+            </Script>
+         </ScriptMethod>
+         <ScriptMethod>
+            <Name>SetProperty</Name>
+            <Script>
+               param([Parameter(Mandatory=$true,Position=1)]$PropertyName)
+               $this.gettype().invokeMember($PropertyName,[System.Reflection.BindingFlags]::SetProperty,$null,$this,@($Args))
+            </Script>
+         </ScriptMethod>
+         <ScriptMethod>
+            <Name>InvokeMethod</Name>
+            <Script>
+               param([Parameter(Mandatory=$true,Position=1)]$MethodName)
+               $this.gettype().invokeMember($MethodName,[System.Reflection.BindingFlags]::InvokeMethod,$null,$this,@($Args))
+            </Script>
+         </ScriptMethod>
+      </Members>
+   </Type>
+</Types>  

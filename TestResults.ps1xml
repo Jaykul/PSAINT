@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+<ViewDefinitions>
+    <View>
+        <Name>PSaint.TestResult</Name>
+        <ViewSelectedBy>
+            <TypeName>PSaint.TestResult</TypeName>
+        </ViewSelectedBy>
+        <!-- <GroupBy>
+            <PropertyName>Result</PropertyName>
+            <Label>Result</Label>
+        </GroupBy> -->
+        <TableControl>
+            <TableHeaders>
+                <TableColumnHeader>
+                    <Label>Result</Label>
+                    <Width>6</Width>
+                </TableColumnHeader>
+                <!--
+                <TableColumnHeader>
+                    <Alignment>Right</Alignment>
+                    <Label>Category</Label>
+                    <Width>20</Width>
+                </TableColumnHeader>
+                -->
+                <TableColumnHeader>
+                    <Label>Name</Label>
+                    <Width>50</Width>
+                </TableColumnHeader>
+                <TableColumnHeader>
+                    <Label>Fail Message</Label>
+                </TableColumnHeader>
+            </TableHeaders>
+            <TableRowEntries>
+                <TableRowEntry>
+                    <TableColumnItems>
+                        <TableColumnItem>
+                            <PropertyName>Result</PropertyName>
+                        </TableColumnItem>
+                        <!--
+                        <TableColumnItem>
+                            <PropertyName>Category</PropertyName>
+                        </TableColumnItem>
+                        -->
+                        <TableColumnItem>
+                            <PropertyName>Name</PropertyName>
+                        </TableColumnItem>
+                        <TableColumnItem>
+                            <PropertyName>FailMessage</PropertyName>
+                        </TableColumnItem>
+                    </TableColumnItems>
+                </TableRowEntry>
+            </TableRowEntries>
+        </TableControl>
+        <!--
+        <CustomControl>
+            <CustomEntries>
+                <CustomEntry>
+                    <CustomItem>
+                        <Frame>
+                            <CustomItem>
+                                <ExpressionBinding>
+                                    <ScriptBlock>
+                                        if($_.Result -match "Fail") {
+                                            Write-Host $_.Result.PadRight(13) -Background DarkRed -Foreground White -NoNewLine
+                                        } elseif($_.Result -match "Pass") {
+                                            Write-Host $_.Result.PadRight(13) -Background DarkGreen -Foreground White -NoNewLine
+                                        } else {
+                                            Write-Host $_.Result.PadRight(13) -Background Yellow -Foreground DarkBlue -NoNewLine
+                                        }
+                                        ""
+                                    </ScriptBlock>
+                                </ExpressionBinding>
+                                <ExpressionBinding>
+                                    <ScriptBlock>
+                                        Write-Host " $(($_.Category -join ', ').PadRight(25)[0..25] -join '')" -NoNewLine
+                                        ""
+                                    </ScriptBlock>
+                                </ExpressionBinding>
+                                <ExpressionBinding>
+                                    <ScriptBlock>
+                                        Write-Host " $($_.Name)" -NoNewLine
+                                        ""
+                                    </ScriptBlock>
+                                </ExpressionBinding>
+                            </CustomItem> 
+                        </Frame>
+                    </CustomItem>
+                </CustomEntry>
+            </CustomEntries>
+        </CustomControl>
+        -->
+    </View>
+</ViewDefinitions>
+</Configuration>
