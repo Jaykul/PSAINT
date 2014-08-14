@@ -22,7 +22,10 @@ The simplest possible tests could be written like this:
 
 
 ## Arrange, Act, Assert is the standard unit-test format ...
-## You may, if you wish, simply write a linear test function, treating the scriptblock as you would any other PowerShell ScriptBlock
+
+You may, if you wish, simply write a linear test function, treating the scriptblock as you would any other PowerShell ScriptBlock:
+
+```
 test Get-Multiplied {
    arrange {
       $x = 10
@@ -36,6 +39,7 @@ test Get-Multiplied {
       $result.MustEqual($total)
    }
 }
+```
 
  Some things to notice:
  1. arrange, act, assert is a formalization of the common test pattern -- we implement this by replacing them with begin/process/end ;)
